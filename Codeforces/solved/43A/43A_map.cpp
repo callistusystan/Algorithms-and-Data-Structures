@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef vector<int> vi;
+
+int main() {
+  ios::sync_with_stdio(0); cin.tie(0);
+
+  int N; cin >> N;
+  map<string, int> M;
+  for (int i=0;i<N;i++) {
+    string si; cin >> si;
+    M[si]++;
+  }
+
+  auto best = M.begin();
+  for (auto it=M.begin();it!=M.end();it++) {
+    if ((*it).second > (*best).second) {
+      best = it;
+    }
+  }
+
+  cout << (*best).first << endl;
+
+  return 0;
+}

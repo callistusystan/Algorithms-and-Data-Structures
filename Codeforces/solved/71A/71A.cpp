@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+typedef vector<int> vi;
+
+int main() {
+  ios::sync_with_stdio(0); cin.tie(0);
+
+  int N; cin >> N;
+  for (int i=0;i<N;i++) {
+    string S; cin >> S;
+    int L = S.size();
+    if (L > 10) {
+      cout << S[0] << L-2 << S[L-1] << '\n';
+    } else {
+      cout << S << '\n';
+    }
+  }
+
+  return 0;
+}
