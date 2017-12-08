@@ -26,7 +26,7 @@ bool binary_search(vector<int> A, int target) {
 
 ## Extensions
 Besides searching for an item in an array, we can easily modify the above algorithm to search for:-
-1. **Lower Bound**
+**1. Lower Bound**
 
     The index of the first item in the list greater than or equal to the target value.
     ```c++
@@ -46,7 +46,7 @@ Besides searching for an item in an array, we can easily modify the above algori
         return hi;
     }
     ```
-2. **Upper Bound**
+**2. Upper Bound**
 
     The index of the first item in the list greater than the target value.
     ```c++
@@ -104,7 +104,7 @@ double square_root(double X) {
 #### 2. Bipartite Matching (Minimax edge in a Perfect Matching)
 
 ```
-Given a bipartite graph, with edge weights, find the smallest possible maximum edge weight in a perfect matching.
+Given a bipartite graph, with weighted edges, find the minimum maximum edge weight in a perfect matching.
 ```
 
 At first glance, this seems like it has nothing to do with Binary Search, however...
