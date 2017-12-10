@@ -26,6 +26,7 @@ bool binary_search(vector<int> A, int target) {
 
 ## Extensions
 Besides searching for an item in an array, we can easily modify the above algorithm to search for:-
+
 **1. Lower Bound**
 
   The index of the first item in the list greater than or equal to the target value.
