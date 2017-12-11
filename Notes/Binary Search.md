@@ -72,11 +72,12 @@ Besides searching for an item in an array, we can easily modify the above algori
 
 The concept of Binary Search is to approach the turning point of a predicate. That is, the value that causes some predicate to change from false to true or vice versa.
 
-For instance, notice that in **Lower bound** and **Upper bound**,
-  - Predicate: A[i] < target
+For instance, notice that in **Lower bound**,
+  - Predicate: A[i] >= target
   - Notice that:
     - i in 0..lo is **false**
     - i in hi..N is **true**
+  - Using this, we can see that after exiting the main loop, we can return hi, as it will be the first value that is >= target.
 
 Once we understand this, we can actually apply Binary Search to many other predicates as well!
 
