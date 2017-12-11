@@ -16,11 +16,11 @@ bool binary_search(vector<int> A, int target) {
     if (A[mid] == target) return true;
     else if (target < A[mid]) {
       hi = mid -1;
-      } else {
-        lo = mid + 1;
-      }
+    } else {
+      lo = mid + 1;
     }
-    return A[lo] == target;
+  }
+  return A[lo] == target;
 }
 ```
 
@@ -43,8 +43,8 @@ Besides searching for an item in an array, we can easily modify the above algori
       mid = (lo+hi)/2
       if (A[mid] >= target) hi = mid;
       else lo = mid;
-      }
-      return hi;
+    }
+    return hi;
   }
   ```
 **2. Upper Bound**
@@ -63,8 +63,8 @@ Besides searching for an item in an array, we can easily modify the above algori
       mid = (lo+hi)/2
       if (A[mid] > target) hi = mid;
       else lo = mid;
-      }
-      return hi;
+    }
+    return hi;
   }
   ```
 
