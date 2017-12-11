@@ -92,7 +92,8 @@ double square_root(double X) {
   double EPS = 1e-9;
   double lo = 0;
   double hi = X;
-  while (hi - lo > EPS) {
+  int it = 0; // in case floating point errors prevent a difference <= EPS
+  while (hi - lo > EPS && it < 100) {
     mid = (lo + hi)/2;
     if (mid*mid < X) lo = mid;
     else hi = mid;
@@ -103,16 +104,13 @@ double square_root(double X) {
 
 #### 2. Bipartite Matching (Minimax edge in a Perfect Matching)
 
-```
-Given a bipartite graph, with edge weights, find the smallest possible maximum edge weight in a perfect matching.
-```
+> Given a bipartite graph, with edge weights, find the smallest possible maximum edge weight in a perfect matching.
 
 At first glance, this seems like it has nothing to do with Binary Search, however...
 
-By being creative, we can change the question into:
-```
+> By being creative, we can change the question into:
 Can we find a perfect matching by using weights <= W?
-```
+
 
 Using this strategy, we can simply remove all weights > W and perform our network flow algorithm!
 
@@ -120,7 +118,8 @@ Using this strategy, we can simply remove all weights > W and perform our networ
 
 Binary Search is an extremely powerful technique, that divides the search interval in half each time.
 
-Due to its nature of a approaching a **turning point** in some predicate function, Binary Search is extremely effective for answering questions involving **maximizing** or **minimizing** something.
+Due to its nature of approaching a **turning point** in some predicate function, Binary Search is extremely effective for answering questions involving **maximizing** or **minimizing** something.
 
 Questions to ask to see if Binary Search could solve a problem:
 1. Could I turn the question into some predicate function, where there is a turning point between true or false?
+2. Do I have an efficient answering checking function, if I were to simply binary search for the answer?
