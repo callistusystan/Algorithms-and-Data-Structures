@@ -76,7 +76,7 @@ For instance, notice that in **Lower bound**,
   - Predicate: A[i] >= target
   - Notice that:
     - i in 0..lo is **false**
-    - i in hi..N is **true**
+    - i in hi..N-1 is **true**
   - Using this, we can see that after exiting the main loop, we can return hi, as it will be the first value that is >= target.
 
 Once we understand this, we can actually apply Binary Search to many other predicates as well!
