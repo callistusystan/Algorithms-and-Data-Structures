@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a collection of problems that require a good understanding on how to work with arrays (usually containing integers).
+This is a collection of problems that shows some good techniques on how to solve problems with arrays.
 
 Most of these problems have obvious inefficient solutions, but a very effecient O(N) solution, _where N is the number of items in the array_
 
