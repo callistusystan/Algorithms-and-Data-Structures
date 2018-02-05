@@ -126,7 +126,7 @@ Reason:-
 
 #### Case 1 (Increasing Subarray)
 
-> Given an array, which is a permutation of integers from 1 to N, you are able to move an element to the front/end of the array in **one** action. What is the minimum number of actions to produce a sorted array? (http://codeforces.com/problemset/problem/605/A)
+> You are given an array, which is a permutation of integers from 1 to N. In an action, you are able to move an element to the front/end of the array. What is the minimum number of actions to transform it into a sorted array? (http://codeforces.com/problemset/problem/605/A)
 
 Approach:
 1. There will only be a certain set of elements that we need to remove
