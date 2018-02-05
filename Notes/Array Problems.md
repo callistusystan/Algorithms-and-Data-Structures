@@ -37,7 +37,7 @@ int solve(vi &need, vi &prices) {
 
 ### Prefix and Suffix arrays
 
-#### Case 1 (Prefix/Suffix sums)
+#### Case 1 (Prefix sums)
 
 > You are given a string S of '.'s and '#'s, and ranged queries to answer about the string. Each query asks how many S[i] = S[i+1] in the specified substring. (http://codeforces.com/problemset/problem/313/B)
 
