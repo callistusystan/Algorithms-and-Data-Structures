@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a collection of problems that require a good understanding on how to work with arrays (usually containing integers).
+This is a collection of problems that shows some good techniques on how to solve problems with arrays.
 
 Most of these problems have obvious inefficient solutions, but a very effecient O(N) solution, _where N is the number of items in the array_
 
@@ -66,7 +66,7 @@ int solve(vi &need, vi &prices) {
 
 ### Prefix and Suffix arrays
 
-#### Case 1 (Prefix/Suffix sums)
+#### Case 1 (Prefix sums)
 
 > You are given a string S of '.'s and '#'s, and ranged queries to answer about the string. Each query asks how many S[i] = S[i+1] in the specified substring. (http://codeforces.com/problemset/problem/313/B)
 
@@ -155,7 +155,7 @@ Reason:-
 
 #### Case 1 (Increasing Subarray)
 
-> Given an array, which is a permutation of integers from 1 to N, you are able to move an element to the front/end of the array in **one** action. What is the minimum number of actions to produce a sorted array? (http://codeforces.com/problemset/problem/605/A)
+> You are given an array, which is a permutation of integers from 1 to N. In an action, you are able to move an element to the front/end of the array. What is the minimum number of actions to transform it into a sorted array? (http://codeforces.com/problemset/problem/605/A)
 
 Approach:
 1. There will only be a certain set of elements that we need to remove
