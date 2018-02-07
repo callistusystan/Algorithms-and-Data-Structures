@@ -37,9 +37,30 @@ bool solve(vi &A, int X) {
 
 ### Running statistics
 
-#### Case 1 (Running Sum)
+#### Case 1 (Running Count)
 
-TBA
+> You are given a string of letters. Count the total number of subsequences containing QAQ.
+http://codeforces.com/problemset/problem/894/A
+
+Approach:
+1. A good strategy is to iterate through the string, and every time we encounter 'A', we count the number of Qs to the left and right
+    - The total ways we could form QAQ would be the multiplication of the Qs to the left and right
+2. Instead of counting inefficiently each time, we can count the number of Qs overall, and keep a running count
+
+```c++
+ll solve(string S) {
+  int N = S.size(), nQ = count(S.begin(), S.end(), 'Q');
+  ll ans = 0, cnt = 0;
+  for (char c : S) {
+    if (c == 'Q') cnt++;
+    else if (c == 'A') {
+      // cnt gives #Qs to the left, while N-cnt gives #Qs to the right
+      ans += cnt*(N-cnt);
+    }
+  }
+  return ans;
+}
+```
 
 #### Case 2 (Running Minimum)
 
@@ -148,6 +169,34 @@ Reason:-
 3. In fact, the previous fact applies to all elements larger than A[0] and A[N-1].
     - This means that the possible solutions are either A[0], A[N-1] or smaller/equal elements.
 4. It is obvious that we do not want smaller elements. The solution is thus either A[0] or A[N-1], so we take the maximum.
+
+<hr />
+
+### Median
+
+#### Case 1 (Point with minimum sum distance)
+
+> You are given an array, representing x-coordinates on the y-axis. Find the point X, where the sum of distances from X to all the other points is minimal. http://codeforces.com/problemset/problem/710/B
+
+Approach:
+1. One mistake it to assume the average of the points.
+    - Suppose we have three points, 0, 6, 10.
+    - The average would suggest to meet at 5, which results in 5+1+5 = 11.
+    - However, the optimal answer would be to meet at 6, which results in 6 + 4 = 10.
+2. To understand why the median is the optimal answer, let us look at the far extremes.
+3. It is obvious that the meeting point should be in between the extremes. Let us choose a random X.
+    - This results in a sum of (X-0) + (10-X) = 10.
+    - This shows that the extremes will need to travel over the distance between them, regardless of X.
+4. This is true for pairs (0,N-1), (1,N-2), (2,N-3), etc UNTIL we reach the middle elements.
+5. Now, we can see that it is optimal to choose this element. In the case of 2 middle elements, we can choose either one.
+
+```c++
+int solve(vi &A) {
+  int N = A.size();
+  sort(A.begin(), A.end());
+  return A[N/2];
+}
+```
 
 <hr />
 
