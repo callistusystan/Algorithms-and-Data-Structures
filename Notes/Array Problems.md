@@ -6,6 +6,35 @@ This is a collection of problems that require a good understanding on how to wor
 
 Most of these problems have obvious inefficient solutions, but a very effecient O(N) solution, _where N is the number of items in the array_
 
+### Two Pointers (or more)
+
+#### Case 1 (Two Sum)
+
+> You are given a sorted array, and an integer X. Your goal is to determine if there are two numbers in the array that sums to X.
+
+Approach:
+1. The most obvious solution would be to use a nested loop to check if 2 numbers add to X.
+    - In a way, this is using two pointers, but just not effectively!
+2. Instead, let us take advantage of the fact that the array is sorted.
+3. We start with two pointers, and set them to the far extremes, i.e. i=0, j=N-1
+4. If A[i] + A[j] < X, we know that we can increase it by incrementing i. Likewise, if A[i] + A[j] > X, we can decrease it by decrementing j.
+5. Following this, we can approach the solution, if it exists! In the worst case, both these pointers would move to the opposite end (but just once), so it is bounded by O(N)
+
+```c++
+bool solve(vi &A, int X) {
+  int N = A.size();
+  int i=0,j=N-1;
+  while (i < j) {
+    if (A[i] + A[j] == X) return true;
+    else if (A[i] + A[j] < X) i++;
+    else j--;
+  }
+  return false;
+}
+```
+
+<hr />
+
 ### Running statistics
 
 #### Case 1 (Running Sum)
@@ -131,7 +160,7 @@ Reason:-
 Approach:
 1. There will only be a certain set of elements that we need to remove
 2. If we know the elements we should remove, the untouched elements would be a continuous sequence a,a+1,a+2,a+3,....,a+k
-    - Note that the longest sequence will be help determine the solution, as this means less elements need to be moved.
+    - Observe that the longer the sequence, the less elements we would need to move. So it is optimal to find the longest increasing subarray, as it will determine the answer.
 3. Knowing this, we could produce a _pos_ array.
     - We could now use the longest increasing subarray algorithm to find the answer
 
