@@ -33,6 +33,32 @@ bool solve(vi &A, int X) {
 }
 ```
 
+#### Case 2 (Groups with abs difference < X)
+
+> You are given an array of pairs, representing the amount of money and friendship factor of each friend. Find the maximum friendship factor that can be obtained from a group of those friends, where the difference in money is less than X. http://codeforces.com/problemset/problem/580/B
+
+Approach:
+1. Again, we can use the method of two pointers.
+2. This time, we use one pointer to iterate over the array indices.
+3. We use the other pointer, moving it to the right while the difference between money_j and money_i is less than X.
+
+```c++
+int solve(vector<pii> &A, int X) {
+  int N = A.size();
+  sort(A.begin(), A.end());
+  int j=0,ans=0,sum=0;
+  for (int i=0;i<N;i++) {
+    if (i) sum -= A[i-1].second;
+    while (j<N && A[j].first-A[i].first < X) {
+      sum += A[j].second;
+      j++;
+    }
+    ans = max(ans, sum);
+  }
+  return ans;
+}
+```
+
 <hr />
 
 ### Running statistics
