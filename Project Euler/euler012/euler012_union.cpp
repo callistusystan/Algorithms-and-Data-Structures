@@ -5,25 +5,31 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> pii;
 
-ll g(ll N) {
-  ll ans = 1;
+map<ll, ll> g(ll N) {
+  map<ll, ll> M;
   for (ll i=2;i*i<=N;i++) {
     if (N%i==0) {
-      int cur = 0;
       while (N%i==0) {
-        cur++;
+        M[i]++;
         N/=i;
       }
-      ans *= (cur+1);
     }
   }
-  if (N > 1) ans *= 2;
-  return ans;
+  if (N > 1) M[N]++;
+  return M;
 }
 
-ll f(int x) {
-  if (x%2) return g(x)*g((x+1)/2);
-  return g(x/2)*g(x+1);
+ll f(ll i) {
+  map<ll, ll> m1 = g(i), m2 = g(i+1);
+  if (m1.count(2)) m1[2]--;
+  else m2[2]--;
+  // union
+  for (auto p : m1) m1[p.first] += m2[p.first];
+  for (auto p : m2)
+    if (!m1.count(p.first)) m1[p.first] += m2[p.first];
+  ll ans = 1;
+  for (auto p : m1) ans *= p.second+1;
+  return ans;
 }
 
 int main() {
