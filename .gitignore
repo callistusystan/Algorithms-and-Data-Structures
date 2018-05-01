@@ -4,3 +4,4 @@ sol
 test.sh
 in*
 out*
+.vscode

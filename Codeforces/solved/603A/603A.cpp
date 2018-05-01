@@ -5,23 +5,32 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int, int> pii;
 
-vector<vector<vi>> memo(1e5+5, vector<vi>(2, vi(2, -1)));
-int N;
+int N; 
 string S;
+vector<vector<vi>> memo(1e5+5, vector<vi>(2, vi(3, -1)));
 
-int rec(int cur, int d, int canFlip) {
+int rec(int cur, int need, int pos) {
   if (cur == N) return 0;
-  else if (memo[cur][d][canFlip] != -1) return memo[cur][d][canFlip];
-  if (S[cur]-'0' == d) memo[cur][d][canFlip] = 1 + rec(cur+1, 1-d, canFlip);
-  else if (canFlip) memo[cur][d][canFlip] = 1 + rec(cur+1, 1-d, 0);
-
-  return memo[cur][d][canFlip] = max(memo[cur][d][canFlip], rec(cur+1, d, canFlip));
+  else if (memo[cur][need][pos] != -1) return memo[cur][need][pos];
+  int ans = 0;
+  if (pos == 0) {
+    if (S[cur]-'0' == need) ans = 1+max(ans, rec(cur+1, 1-need, pos));
+    else ans = max(ans, rec(cur+1, need, pos));
+  } else if (pos == 1) {
+    if (S[cur]-'0' != need) ans = 1+max(ans, rec(cur+1, 1-need, pos));
+    else ans = max(ans, rec(cur+1, need, pos));
+  } else {
+    if (S[cur]-'0' == need) ans = 1+max(ans, rec(cur+1, 1-need, pos));
+    else ans = max(ans, rec(cur+1, need, pos));
+  }
+  if (pos < 2) ans = max(ans, rec(cur, need, pos+1));
+  return memo[cur][need][pos] = ans;
 }
 
 int main() {
   ios::sync_with_stdio(0); cin.tie(0);
 
   cin >> N >> S;
-  cout << rec(0, S[0]-'0', 1) << endl;
+  cout << max(rec(0, 0, 0), rec(0, 1, 0)) << endl;
   return 0;
 }
