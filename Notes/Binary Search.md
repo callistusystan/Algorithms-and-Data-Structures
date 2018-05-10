@@ -10,14 +10,14 @@ Time Complexity: O(log N), _where N is the number of items in the array_
 ```c++
 bool binary_search(vector<int> A, int target) {
   int lo = 0;
-  int hi = A.size()-1;
-  while (lo <= hi) {
+  int hi = A.size();
+  while (lo != hi-1) {
     mid = (lo+hi)/2
     if (A[mid] == target) return true;
     else if (target < A[mid]) {
-      hi = mid -1;
+      hi = mid;
     } else {
-      lo = mid + 1;
+      lo = mid;
     }
   }
   return A[lo] == target;
