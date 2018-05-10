@@ -11,7 +11,7 @@ Time Complexity: O(log N), _where N is the number of items in the array_
 bool binary_search(vector<int> A, int target) {
   int lo = 0;
   int hi = A.size()-1;
-  while (lo != hi) {
+  while (lo <= hi) {
     mid = (lo+hi)/2
     if (A[mid] == target) return true;
     else if (target < A[mid]) {
