@@ -225,14 +225,14 @@ bool canWin(string &S) {
   if (memo.count(S)) return memo[S];
   int N = S.size();
   for (int i=0;i+1<N;i++) {
-    if (S.substr(i,2) ==  "--") {
-      S[i] = S[i+1] =  '+';
-      bool res =  canWin(S);
-      S[i] = S[i+1] =  '-';
-      if (!res) return memo[S] =  true;
+    if (S.substr(i,2) == "--") {
+      S[i] = S[i+1] = '+';
+      bool res = canWin(S);
+      S[i] = S[i+1] = '-';
+      if (!res) return memo[S] = true;
     }
   }
-  return memo[S] =  false;
+  return memo[S] = false;
 }
 ```
 
