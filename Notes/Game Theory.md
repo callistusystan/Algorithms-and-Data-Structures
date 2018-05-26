@@ -16,22 +16,22 @@ The simplest way to find winning moves for partial games would be a brute force 
 
 ```c++
 bool canWin(GameState gameState, int curPlayer) {
-	vector<Move> moves = getMoves(gameState, curPlayer);
-	for (Move move : moves) {
-		// make this move
-		makeMove(gameState, move);
-
-		// try this move
-		bool canNextPlayerWin = canWin(gameState, 1-curPlayer);
-		
-		// undo the move after trying
-		undoMove(gameState, move);
-		
-		// if this moves cause the next player to lose, we have a winning move
-		if (!canNextPlayerWin) return true;
-	}
-	// none of the moves are winning
-	return false;
+  vector<Move> moves = getMoves(gameState, curPlayer);
+  for (Move move : moves) {
+    // make this move
+    makeMove(gameState, move);
+    
+    // try this move
+    bool canNextPlayerWin = canWin(gameState, 1-curPlayer);
+    
+    // undo the move after trying
+    undoMove(gameState, move);
+    
+    // if this moves cause the next player to lose, we have a winning move
+    if (!canNextPlayerWin) return true;
+  }
+  // none of the moves are winning
+  return false;
 }
 ```
 
@@ -52,21 +52,22 @@ Similar to partial games, we can use a brute force algorithm to find winning mov
 
 ```c++
 bool canWin(GameState gameState) {
-	vector<Move> moves = getMoves(gameState);
-	for (Move move : moves) {
-		// make this move
-		makeMove(gameState, move);
-
-		// try this move
-		bool canNextPlayerWin = canWin(gameState);
-		
-		// undo the move after trying
-		undoMove(gameState, move);
-		// if this moves cause the next player to lose, we have a winning move
-		if (!canNextPlayerWin) return true;
-	}
-	// none of the moves are winning
-	return false;
+  vector<Move> moves = getMoves(gameState);
+  for (Move move : moves) {
+    // make this move
+    makeMove(gameState, move);
+    
+    // try this move
+    bool canNextPlayerWin = canWin(gameState);
+    
+    // undo the move after trying
+    undoMove(gameState, move);
+    
+    // if this moves cause the next player to lose, we have a winning move    
+    if (!canNextPlayerWin) return true;
+  }
+  // none of the moves are winning
+  return false;
 }
 ```
 
@@ -89,12 +90,12 @@ A very simple concept. We look for the smallest non-negative number (starting fr
 
 ```c++
 int mex(set<int> &grundies) {
-	int res = 0;
-	for (int num : grundies) {
-		if (res != num) return res;
-		res = num+1;
-	}
-	return res;
+  int res = 0;
+  for (int num : grundies) {
+    if (res != num) return res;
+    res = num+1;
+  }
+  return res;
 }
 ```
 
@@ -113,25 +114,25 @@ To calculate this:-
 map<gameState, int> memo;
 
 int grundy(GameState gameState) {
-	if (isLosing(gameState)) return 0;
-	else if (memo.count(gameState)) return memo[gameState];
-
-	// get moves
-	vector<Move> moves = getMoves(gameState);
-
-	// get a set of grundy numbers
-	set<int> grundies;
-	for (Move move : moves) {
-		// make this move
-		makeMove(gameState, move);
-		
-		// get the grundy number of the resulting game state
-		grundies.insert(grundy(gameState))
-		
-		// undo the move after trying
-		undoMove(gameState, move);
-	}
-	return memo[gameState] = mex(grundies);
+  if (isLosing(gameState)) return 0;
+  else if (memo.count(gameState)) return memo[gameState];
+  
+  // get moves
+  vector<Move> moves = getMoves(gameState);
+  
+  // get a set of grundy numbers
+  set<int> grundies;
+  for (Move move : moves) {
+    // make this move
+    makeMove(gameState, move);
+    
+    // get the grundy number of the resulting game state
+    grundies.insert(grundy(gameState));
+    
+    // undo the move after trying
+    undoMove(gameState, move);
+  }
+  return memo[gameState] = mex(grundies);
 }
 ```
 
@@ -165,30 +166,30 @@ If all moves at the current position leads to only **_N_**-positions, that means
 vector<int> memo(MAXN, -1);
 
 int mex(set<int> &grundies) {
-	int res = 0;
-	for (int num : grundies) {
-		if (res != num) return res;
-		res = num+1;
-	}
-	return res;
+  int res = 0;
+  for (int num : grundies) {
+    if (res != num) return res;
+    res = num+1;
+  }
+  return res;
 }
 
 int grundy(int num) {
-	if (num == 0) return 0;
-	else if (memo[num] != -1) return memo[num];
-	
-	set<int> grundies;
-	if (num >= 1) grundies.insert(grundy(num-1));
-	if (num >= 2) grundies.insert(grundy(num-2));
-	if (num >= 4) grundies.insert(grundy(num-4));
-	
-	// grundy number for this position is the MEX of the grundy numbers for possible next positions
-	return mex(grundies);
+  if (num == 0) return 0;
+  else if (memo[num] != -1) return memo[num];
+  
+  set<int> grundies;
+  if (num >= 1) grundies.insert(grundy(num-1));
+  if (num >= 2) grundies.insert(grundy(num-2));
+  if (num >= 4) grundies.insert(grundy(num-4));
+  
+  // grundy number for this position is the MEX of the grundy numbers for possible next positions
+  return mex(grundies);
 }
 
-bool canWin(int stonesInPile) {
-	// grundy number 
-	return grundy(stonesInPile) > 0;
+bool canWin(int stonesInPile) {	
+  // grundy number 
+  return grundy(stonesInPile) > 0;
 }
 ```
 
@@ -218,17 +219,17 @@ We can easily implement the brute force solution as follows:
 map<string, bool> memo;
 
 bool canWin(string &S) {
-	if (memo.count(S)) return memo[S];
-	int N = S.size();
-	for (int i=0;i+1<N;i++) {
-		if (S.substr(i,2) ==  "--") {
-			S[i] = S[i+1] =  '+';
-			bool res =  canWin(S);
-			S[i] = S[i+1] =  '-';
-			if (!res) return memo[S] =  true;
-		}
-	}
-	return memo[S] =  false;
+  if (memo.count(S)) return memo[S];
+  int N = S.size();
+  for (int i=0;i+1<N;i++) {
+    if (S.substr(i,2) ==  "--") {
+      S[i] = S[i+1] =  '+';
+      bool res =  canWin(S);
+      S[i] = S[i+1] =  '-';
+      if (!res) return memo[S] =  true;
+    }
+  }
+  return memo[S] =  false;
 }
 ```
 
@@ -253,40 +254,44 @@ Note that I used memoization to improve this (yay!), but this is still far too s
 vector<int> memo(MAXN, -1);
 
 vi getSubgames(string &S) {
-	int N = S.size();
-	vi subgames;
-	int i=0,j=0;
-	while (i<N) {
-		while (i < N && S[i] == 'o') i++;
-		j = i;
-		while (j < N && S[j] == 'x') j++;
-		subgames.push_back(j-i);
-		i = j;
-	}
-	return subgames;
+  int N = S.size();
+  vi subgames;
+  int i=0,j=0;
+  while (i<N) {
+    while (i < N && S[i] == 'o') i++;
+    j = i;
+    while (j < N && S[j] == 'x') j++;
+    subgames.push_back(j-i);
+    i = j;
+  }
+  return subgames;
 }
 
-int mex(set<int> &grundies) {
-	int res = 0;
-	for (int num : grundies) {
-		if (res != num) return res;
-		res = num+1;
-	}
-	return res;
+int mex(set<int> &grundies) {	
+  int res = 0;
+  for (int num : grundies) {
+    if (res != num) return res;
+    res = num+1;
+  }
+  return res;
 }
 
 int grundy(int num) {
-	if (memo[n] != -1) return memo[n];
-	set<int> grundies;
-	for (int i=0;i<n/2;i++) grundies.insert(grundy(i)^grundy(n-i-2));
-	return memo[n] = mex(grundies);
+  if (memo[n] != -1) return memo[n];
+  set<int> grundies;
+  for (int i=0;i<n/2;i++) grundies.insert(grundy(i)^grundy(n-i-2));
+  return memo[n] = mex(grundies);
 }
 
 bool canWin(string &S) {
-	vi subgames = getSubgames(S);
-	int N = subgames.size();
-	int res = 0;
-	for (int i=0;i<N;i++) res ^= grundy(subgames[i]);
-	return res > 0;
+  vi subgames = getSubgames(S);
+  int N = subgames.size();
+  int res = 0;
+  for (int i=0;i<N;i++) res ^= grundy(subgames[i]);
+  return res > 0;
 }
 ```
+
+## Conclusion
+
+There is still so much I need to learn to understand Game Theory more, but I guess the biggest thing I learnt is the Sprague Grundy theorem that is amazing for solving problems on impartial games
