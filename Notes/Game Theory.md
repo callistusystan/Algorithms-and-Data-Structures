@@ -263,10 +263,17 @@ vi getSubgames(string &S) {
   vi subgames;
   int i=0,j=0;
   while (i<N) {
+    // find leftmost x
     while (i < N && S[i] == 'o') i++;
+    
+    // find end of x's
     j = i;
     while (j < N && S[j] == 'x') j++;
+    
+    // push the no. of x's into subgames
     subgames.push_back(j-i);
+    
+    // set i to j
     i = j;
   }
   return subgames;
@@ -283,14 +290,18 @@ int mex(set<int> &grundies) {
 
 int grundy(int num) {
   if (memo[n] != -1) return memo[n];
+  
+  // get the grundy numbers for all possible next states
   set<int> grundies;
-  for (int i=0;i<n/2;i++) grundies.insert(grundy(i)^grundy(n-i-2));
+  for (int i=0;i<n/2;i++) grundies.insert(grundy(i)^grundy(n-i-2)); // loop to N/2
   return memo[n] = mex(grundies);
 }
 
 bool canWin(string &S) {
   vi subgames = getSubgames(S);
   int N = subgames.size();
+ 
+  // we take the xor of the grundy numbers for each subgame
   int res = 0;
   for (int i=0;i<N;i++) res ^= grundy(subgames[i]);
   return res > 0;
