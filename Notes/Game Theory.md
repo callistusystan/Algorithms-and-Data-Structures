@@ -238,6 +238,8 @@ bool canWin(string &S) {
 
 Note that I used memoization to improve this (yay!), but this is still far too slow in average and worst cases; still non-polynomial time.
 
+Time Complexity: **O(N!)**
+
 #### Insights
 
  1. This is an impartial game. Thus, we can apply the Sprague Grundy theorem.
