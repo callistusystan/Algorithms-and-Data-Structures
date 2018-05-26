@@ -111,7 +111,7 @@ To calculate this:-
  2. Get the MEX of the set
 
 ```c++
-map<gameState, int> memo;
+map<GameState, int> memo;
 
 int grundy(GameState gameState) {
   if (isLosing(gameState)) return 0;
@@ -146,13 +146,15 @@ For this example, let us assume the valid moves each turn are taking 1, 2 or 4 s
 
 The following shows how we can compute the grundy numbers for this game:-
 
-> g[0] = 0 // 0 stones symbolize a losing position, so we initialize this
-> g[1] = MEX({ g[0] }) = MEX({ 0 }) = 1 // g[0], since we can remove 1 stone
-> g[2] = MEX({ g[0], g[1] }) = MEX({ 0, 1 }) = 2 // g[0], g[1], remove 1 and 2 stones
-> g[3] = MEX({ g[1], g[2] }) = MEX({ 0, 1 }) = 2 // g[1], g[2], remove 1 and 2 stones
-> g[4] = MEX({ g[0], g[2], g[3] }) = MEX({ 0, 2, 2 }) = 1 // g[0], g[2], g[3] remove 1, 2 and 4 stones
-> g[5] = MEX({ g[1], g[3], g[4] }) = MEX({ 1, 2, 1 }) = 0 // No way to win, since g[5] = 0
-> g[6] = MEX({ g[1], g[3], g[4] }) = MEX({ 1, 2, 1 }) = 0 // No way to win, since g[6] = 0
+```
+g[0] = 0 // 0 stones symbolize a losing position, so we initialize this
+g[1] = MEX({ g[0] }) = MEX({ 0 }) = 1 // g[0], since we can remove 1 stone
+g[2] = MEX({ g[0], g[1] }) = MEX({ 0, 1 }) = 2 // g[0], g[1], remove 1 and 2 stones
+g[3] = MEX({ g[1], g[2] }) = MEX({ 0, 1 }) = 2 // g[1], g[2], remove 1 and 2 stones
+g[4] = MEX({ g[0], g[2], g[3] }) = MEX({ 0, 2, 2 }) = 1 // g[0], g[2], g[3] remove 1, 2 and 4 stones
+g[5] = MEX({ g[1], g[3], g[4] }) = MEX({ 1, 2, 1 }) = 0 // No way to win, since g[5] = 0
+g[6] = MEX({ g[1], g[3], g[4] }) = MEX({ 1, 2, 1 }) = 0 // No way to win, since g[6] = 0
+```
 
 The grundy numbers is very similar to the concept of **_N_**-positions and **_P_**-positions
 > The **_N_**-position symbolizes a winning position for the next player (current player)
