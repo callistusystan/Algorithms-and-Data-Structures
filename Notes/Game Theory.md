@@ -147,10 +147,10 @@ For this example, let us assume the valid moves each turn are taking 1, 2 or 4 s
 The following shows how we can compute the grundy numbers for this game:-
 
 ```
-g[0] = 0 // 0 stones symbolize a losing position, so we initialize this
-g[1] = MEX({ g[0] }) = MEX({ 0 }) = 1 // g[0], since we can remove 1 stone
-g[2] = MEX({ g[0], g[1] }) = MEX({ 0, 1 }) = 2 // g[0], g[1], remove 1 and 2 stones
-g[3] = MEX({ g[1], g[2] }) = MEX({ 0, 1 }) = 2 // g[1], g[2], remove 1 and 2 stones
+g[0] = 0 						// 0 stones symbolize a losing position, so we initialize this
+g[1] = MEX({ g[0] }) 		 = MEX({ 0 }) 	    = 1 // g[0], since we can remove 1 stone
+g[2] = MEX({ g[0], g[1] }) 	 = MEX({ 0, 1 })    = 2 // g[0], g[1], remove 1 and 2 stones
+g[3] = MEX({ g[1], g[2] }) 	 = MEX({ 0, 1 })    = 2 // g[1], g[2], remove 1 and 2 stones
 g[4] = MEX({ g[0], g[2], g[3] }) = MEX({ 0, 2, 2 }) = 1 // g[0], g[2], g[3] remove 1, 2 and 4 stones
 g[5] = MEX({ g[1], g[3], g[4] }) = MEX({ 1, 2, 1 }) = 0 // No way to win, since g[5] = 0
 g[6] = MEX({ g[1], g[3], g[4] }) = MEX({ 1, 2, 1 }) = 0 // No way to win, since g[6] = 0
@@ -158,6 +158,7 @@ g[6] = MEX({ g[1], g[3], g[4] }) = MEX({ 1, 2, 1 }) = 0 // No way to win, since 
 
 The grundy numbers is very similar to the concept of **_N_**-positions and **_P_**-positions
 > The **_N_**-position symbolizes a winning position for the next player (current player)
+>
 > The **_P_**-position symbolizes a winning position for the previous player
 
 If all moves at the current position leads to only **_N_**-positions, that means that the current position is a **_P_**-position (losing position). Otherwise, it is a **_N_**-position.
@@ -186,11 +187,11 @@ int grundy(int num) {
   if (num >= 4) grundies.insert(grundy(num-4));
   
   // grundy number for this position is the MEX of the grundy numbers for possible next positions
-  return mex(grundies);
+  return memo[num] = mex(grundies);
 }
 
 bool canWin(int stonesInPile) {	
-  // grundy number 
+  // we win if grundy number is greater than 0
   return grundy(stonesInPile) > 0;
 }
 ```
@@ -209,7 +210,7 @@ In fact, this idea can be used for moves which might create more simultaneous ga
 
 ## Example (A String Game)
 
-> Given a string consisting of x's and o's, players take turns flipping "xx"s into "oo"s.
+> We have a string consisting of x's and o's, players take turns flipping "xx"s into "oo"s.
 > 
 > Given the game state and that you are the current player to move, write a function that determines if you can win.
 
@@ -239,7 +240,7 @@ Note that I used memoization to improve this (yay!), but this is still far too s
 
 #### Insights
 
- 1. This is clearly an impartial game. Thus, we can apply the Sprague Grundy theorem.
+ 1. This is an impartial game. Thus, we can apply the Sprague Grundy theorem.
  2. Each substring of x's is its own game. Similar to Nim, we can represent a game by the number of x's
  3. A move will create more simultaneous games, which we can use the **XOR** technique to find the grundy number.
 	 - Example: xxxxx
@@ -294,6 +295,8 @@ bool canWin(string &S) {
 }
 ```
 
+Time Complexity: **O(N^2)**
+
 ## Conclusion
 
-There is still so much I need to learn to understand Game Theory more, but I guess the biggest thing I learnt is the Sprague Grundy theorem that is amazing for solving problems on impartial games
+There is still so much I need to learn to understand Game Theory more, but I guess I wanted to share the most useful thing I've learnt, which is the Sprague Grundy theorem for impartial games
