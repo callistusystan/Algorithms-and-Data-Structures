@@ -13,6 +13,7 @@ As of 23rd April, I have solved over <strong>800</strong> problems on [Codeforce
 ## Notes
 1. [Binary Search](https://github.com/callistusystan/Algorithms-and-Data-Structures/blob/master/Notes/Binary%20Search.md)
 2. [Array Problems](https://github.com/callistusystan/Algorithms-and-Data-Structures/blob/master/Notes/Array%20Problems.md)
+3. [Game Theory](https://github.com/callistusystan/Algorithms-and-Data-Structures/blob/master/Notes/Game%20Theory.md)
 
 ## Resources
 
