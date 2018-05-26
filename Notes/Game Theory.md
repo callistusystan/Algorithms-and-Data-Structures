@@ -210,7 +210,7 @@ In fact, this idea can be used for moves which might create more simultaneous ga
 
 ## Example (A String Game)
 
-> We have a string consisting of x's and o's, players take turns flipping "xx"s into "oo"s.
+> We have a string consisting of x's and o's, players take turns flipping "xx"s into "oo"s. The loser is the one who cannot make a move
 > 
 > Given the game state and that you are the current player to move, write a function that determines if you can win.
 
@@ -243,7 +243,7 @@ Time Complexity: **O(N!)**
 #### Insights
 
  1. This is an impartial game. Thus, we can apply the Sprague Grundy theorem.
- 2. Each substring of x's is its own game. Similar to Nim, we can represent a game by the number of x's
+ 2. Each substring of x's is a game. We can use the **simultaneous games** concept to solve this problem
  3. A move will create more simultaneous games, which we can use the **XOR** technique to find the grundy number.
 	 - Example: xxxxx
 		 - ooxxx leads to game(0) and game(3)
