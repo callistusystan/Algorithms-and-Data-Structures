@@ -156,6 +156,8 @@ g[5] = MEX({ g[1], g[3], g[4] }) = MEX({ 0, 1 }) = 2 // g[1], g[3], g[4], remove
 g[6] = MEX({ g[2], g[4], g[5] }) = MEX({ 1, 2 }) = 0 // No way to win, since g[6] = 0
 ```
 
+**Fun fact: It is very easy to analyse patterns wih grundy numbers. Here, we can see that any multiple of 3 is a losing position and come up with an O(1) solution!
+
 The grundy numbers is very similar to the concept of **_N_**-positions and **_P_**-positions
 > The **_N_**-position symbolizes a winning position for the next player (current player)
 >
