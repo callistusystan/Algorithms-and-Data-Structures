@@ -8,7 +8,7 @@ In order to do so, I actively attend the Monash Competitive Programming Club, un
 
 Under the advice of Coach Darcy, I aim to solve as many Codeforces problems as I can, from most solved to least solved :muscle:.
 
-As of 6th June April, I have solved over <strong>900</strong> problems on [Codeforces](http://www.codeforces.com).
+As of 6th June, I have solved over <strong>900</strong> problems on [Codeforces](http://www.codeforces.com).
 
 ## Notes
 1. [Binary Search](https://github.com/callistusystan/Algorithms-and-Data-Structures/blob/master/Notes/Binary%20Search.md)
