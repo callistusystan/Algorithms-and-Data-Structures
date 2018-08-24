@@ -95,7 +95,7 @@ double square_root(double X) {
   double lo = 0;
   double hi = X;
   int it = 0; // in case floating point errors prevent a difference <= EPS
-  while (hi - lo > EPS && it < 100) {
+  while (hi - lo > EPS && it++ < 100) {
     mid = (lo + hi)/2;
     if (mid*mid < X) lo = mid;
     else hi = mid;
