@@ -9,25 +9,28 @@ int main() {
   ios::sync_with_stdio(0); cin.tie(0);
 
   ll N, K; cin >> N >> K;
-  vi A(N);
-  for (int i=0;i<N;i++) cin >> A[i];
-  sort(A.begin(), A.end());
+  vi A(N), len(N);
+  for (int i=0;i<N;i++) {
+    cin >> A[i];
+    len[i] = to_string(A[i]).size();
+  }
 
   map<int, vi> remainderCnt;
   for (int i=0;i<N;i++) {
     if (remainderCnt[A[i]%K].size() == 0) remainderCnt[A[i]%K].resize(25);
-    remainderCnt[A[i]%K][to_string(A[i]).size()]++;
+    remainderCnt[A[i]%K][len[i]]++;
   }
 
   ll ans = 0;
   for (int i=0;i<N;i++) {
-    int len = to_string(A[i]).size();
     ll r = A[i]%K;
     for (int j=1;j<=10;j++) {
-      r *= 10;
+      r = ((r%K)*10)%K;
       int need = (K-(r%K))%K;
-      ans += remainderCnt[need].size() ? remainderCnt[need][j] : 0;
-      if (A[i]%K == need && len == j && remainderCnt[need].size()) ans--;
+      if (!remainderCnt.count(need)) continue;
+      vi &v = remainderCnt[need];
+      ans += v.size() ? v[j] : 0;
+      if (A[i]%K == need && len[i] == j && v.size()) ans--;
     }
   }
   cout << ans << endl;  
