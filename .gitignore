@@ -5,3 +5,4 @@ test.sh
 in*
 out*
 .vscode
+launch.bat
