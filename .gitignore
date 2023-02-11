@@ -6,3 +6,5 @@ in*
 out*
 .vscode
 launch.bat
+problem.pdf
+*.out
